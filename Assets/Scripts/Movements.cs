@@ -72,7 +72,17 @@ public class Movements : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x * playerSpeed + transform.forward * z * playerSpeed;
+        Vector3 move;
+
+        if(z < 0)
+        {
+            move = transform.right * x * walkSpeed + transform.forward * z * walkSpeed;
+        }
+        else
+        {
+            move = transform.right * x * walkSpeed + transform.forward * z * playerSpeed;
+
+        }
 
         if (controller.isGrounded)
         {
