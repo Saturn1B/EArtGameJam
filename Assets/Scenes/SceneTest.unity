@@ -8624,6 +8624,7 @@ GameObject:
   - component: {fileID: 315752226}
   - component: {fileID: 315752225}
   - component: {fileID: 315752224}
+  - component: {fileID: 315752228}
   m_Layer: 9
   m_Name: OreTest (2)
   m_TagString: Untagged
@@ -8639,7 +8640,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315752222}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.38, y: -0.19, z: 3.08}
+  m_LocalPosition: {x: -4.38, y: -0.1, z: 3.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1020477346}
@@ -8724,6 +8725,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315752222}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &315752228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315752222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8451e6992f17794aac07107014eb6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CutCascades: 4
+  ExplodeForce: 750
 --- !u!1 &356440950
 GameObject:
   m_ObjectHideFlags: 0
@@ -29198,7 +29213,7 @@ GameObject:
   - component: {fileID: 1695920421}
   - component: {fileID: 1695920420}
   - component: {fileID: 1695920419}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29295,6 +29310,7 @@ GameObject:
   - component: {fileID: 1715645255}
   - component: {fileID: 1715645254}
   - component: {fileID: 1715645253}
+  - component: {fileID: 1715645257}
   m_Layer: 9
   m_Name: OreTest (4)
   m_TagString: Untagged
@@ -29310,7 +29326,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715645251}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.38, y: -0.19, z: 7.19}
+  m_LocalPosition: {x: -4.38, y: -0.1, z: 7.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 356440951}
@@ -29395,6 +29411,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715645251}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1715645257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715645251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8451e6992f17794aac07107014eb6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CutCascades: 4
+  ExplodeForce: 750
 --- !u!1 &1722215483
 GameObject:
   m_ObjectHideFlags: 0
@@ -29520,6 +29550,7 @@ GameObject:
   - component: {fileID: 1806961422}
   - component: {fileID: 1806961421}
   - component: {fileID: 1806961420}
+  - component: {fileID: 1806961424}
   m_Layer: 9
   m_Name: OreTest (3)
   m_TagString: Untagged
@@ -29535,7 +29566,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1806961418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.38, y: -0.19, z: 5.1}
+  m_LocalPosition: {x: -4.38, y: -0.1, z: 5.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 636757060}
@@ -29620,6 +29651,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1806961418}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1806961424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806961418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8451e6992f17794aac07107014eb6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CutCascades: 4
+  ExplodeForce: 750
 --- !u!1 &1911949454
 GameObject:
   m_ObjectHideFlags: 0
@@ -29698,7 +29743,9 @@ GameObject:
   - component: {fileID: 1913084060}
   - component: {fileID: 1913084059}
   - component: {fileID: 1913084058}
+  - component: {fileID: 1913084062}
   - component: {fileID: 1913084057}
+  - component: {fileID: 1913084063}
   m_Layer: 9
   m_Name: OreTest
   m_TagString: Untagged
@@ -29792,13 +29839,41 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913084056}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.38, y: -0.19, z: -0.42766988}
+  m_LocalPosition: {x: -4.38, y: -0.1, z: -0.42766988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1111349583}
   m_Father: {fileID: 534002891}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1913084062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913084056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8451e6992f17794aac07107014eb6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CutCascades: 4
+  ExplodeForce: 750
+--- !u!114 &1913084063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913084056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8451e6992f17794aac07107014eb6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CutCascades: 10
+  ExplodeForce: 5
 --- !u!1 &1937654400
 GameObject:
   m_ObjectHideFlags: 0
@@ -30019,6 +30094,7 @@ GameObject:
   - component: {fileID: 2001324159}
   - component: {fileID: 2001324158}
   - component: {fileID: 2001324157}
+  - component: {fileID: 2001324161}
   m_Layer: 9
   m_Name: OreTest (1)
   m_TagString: Untagged
@@ -30034,7 +30110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001324155}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.38, y: -0.19, z: 1.27}
+  m_LocalPosition: {x: -4.38, y: -0.1, z: 1.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 33248673}
@@ -30119,6 +30195,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001324155}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2001324161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001324155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8451e6992f17794aac07107014eb6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CutCascades: 4
+  ExplodeForce: 750
 --- !u!1 &2038133439
 GameObject:
   m_ObjectHideFlags: 0

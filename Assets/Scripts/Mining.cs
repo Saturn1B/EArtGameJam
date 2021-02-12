@@ -34,7 +34,7 @@ public class Mining : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                target.GetComponent<Ore>().currentTime += Time.deltaTime;
+                target.GetComponent<Ore>().currentTime += 0.01f;
                 if (!playParticle)
                 {
                     target.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
@@ -52,7 +52,8 @@ public class Mining : MonoBehaviour
             {
                 target.GetComponent<Ore>().currentTime = 0;
                 PlayerInventory.coalNumber += target.GetComponent<Ore>().coalGiven;
-                Destroy(target.gameObject);
+                //Destroy(target.gameObject);
+                StartCoroutine(DestroyOre(target));
                 target = null;
                 playParticle = false;
             }
@@ -67,5 +68,20 @@ public class Mining : MonoBehaviour
                 playParticle = false;
             }
         }
+    }
+
+    IEnumerator DestroyOre(GameObject ore)
+    {
+        ore.GetComponent<MeshDestroy>().DestroyMesh();
+        Destroy(ore);
+        yield return new WaitForSeconds(0.5f);
+        GameObject[] residus = GameObject.FindGameObjectsWithTag("ToDestroy");
+        Debug.Log(residus.Length);
+        for (int i = 0; i < residus.Length; i++)
+        {
+            Destroy(residus[i]);
+            yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
+        }
+        yield return new WaitForSeconds(1);
     }
 }

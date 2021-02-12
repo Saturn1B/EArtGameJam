@@ -68,7 +68,7 @@ public class MeshDestroy : MonoBehaviour
         for (var i = 0; i < parts.Count; i++)
         {
             parts[i].MakeGameobject(this);
-            parts[i].GameObject.tag = "TrucADestroy";
+            parts[i].GameObject.tag = "ToDestroy";
             parts[i].GameObject.GetComponent<Rigidbody>().AddForceAtPosition(parts[i].Bounds.center * ExplodeForce, transform.position);
             //parts[i].GameObject.GetComponent<Collider>().isTrigger = true;
             parts[i].GameObject.layer = 8;

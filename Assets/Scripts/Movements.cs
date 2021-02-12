@@ -39,7 +39,6 @@ public class Movements : MonoBehaviour
         {
             Move();
             Sprint();
-            CalculateVelocity();
         }
     }
 
@@ -84,7 +83,7 @@ public class Movements : MonoBehaviour
 
         }
 
-        if (controller.isGrounded)
+        if (isGrounded())
         {
             velocityY = 0f;
             if (Input.GetKeyDown(KeyCode.Space))
@@ -133,12 +132,8 @@ public class Movements : MonoBehaviour
         playerSpeed = walkSpeed;
     }
 
-    void CalculateVelocity()
+    private bool isGrounded()
     {
-        linearVelocity = (transform.position - previousPosition) / Time.deltaTime;
-        Vector3 angularVelocity = (transform.rotation.eulerAngles - previousRotation.eulerAngles) / Time.deltaTime;
-        //Debug.Log("Vlinear" + linearVelocity.magnitude);
-        previousPosition = transform.position;
-        previousRotation = transform.rotation;
+        return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
     }
 }

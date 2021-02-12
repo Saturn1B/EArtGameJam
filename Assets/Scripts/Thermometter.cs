@@ -38,7 +38,7 @@ public class Thermometter : MonoBehaviour
         if(diff < 0)
         {
             temp += diff;
-            temp -= 0.01f;
+            temp -= 0.1f;
         }
 
         while (PlayerThermometter.value < temp)
