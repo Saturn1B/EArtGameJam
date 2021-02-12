@@ -13,6 +13,10 @@ public class Mining : MonoBehaviour
     [SerializeField]
     LayerMask layer;
 
+    GameObject target;
+
+    bool playParticle;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,20 +30,41 @@ public class Mining : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, gameObject.transform.GetChild(0).transform.forward, out hit, maxDistance, layer))
         {
+            target = hit.transform.gameObject;
+
             if (Input.GetMouseButton(0))
             {
-                hit.transform.GetComponent<Ore>().currentTime += Time.deltaTime;
+                target.GetComponent<Ore>().currentTime += Time.deltaTime;
+                if (!playParticle)
+                {
+                    target.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+                    playParticle = true;
+                }
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                hit.transform.GetComponent<Ore>().currentTime = 0;
+                target.GetComponent<Ore>().currentTime = 0;
+                target.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+                playParticle = false;
             }
 
-            if (hit.transform.GetComponent<Ore>().currentTime >= hit.transform.GetComponent<Ore>().timeToMine)
+            if (target.GetComponent<Ore>().currentTime >= target.GetComponent<Ore>().timeToMine)
             {
-                hit.transform.GetComponent<Ore>().currentTime = 0;
-                PlayerInventory.coalNumber += hit.transform.GetComponent<Ore>().coalGiven;
-                Destroy(hit.transform.gameObject);
+                target.GetComponent<Ore>().currentTime = 0;
+                PlayerInventory.coalNumber += target.GetComponent<Ore>().coalGiven;
+                Destroy(target.gameObject);
+                target = null;
+                playParticle = false;
+            }
+        }
+        else
+        {
+            if(target != null)
+            {
+                target.GetComponent<Ore>().currentTime = 0;
+                target.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+                target = null;
+                playParticle = false;
             }
         }
     }
