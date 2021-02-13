@@ -29,7 +29,9 @@ public class Movements : MonoBehaviour
 
     public Slider StaminaSlider;
 
-    public bool regen;
+    public float regenRadius;
+
+    public GameObject Furnace;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +48,7 @@ public class Movements : MonoBehaviour
             Sprint();
         }
 
-        if (regen && StaminaSlider.value < StaminaSlider.maxValue)
+        if (Vector3.Distance(transform.position, Furnace.transform.position) < regenRadius && StaminaSlider.value < StaminaSlider.maxValue)
         {
             StaminaSlider.value += 0.2f;
         }
@@ -156,21 +158,5 @@ public class Movements : MonoBehaviour
     private bool isGrounded()
     {
         return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Regen"))
-        {
-            regen = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Regen"))
-        {
-            regen = false;
-        }
     }
 }

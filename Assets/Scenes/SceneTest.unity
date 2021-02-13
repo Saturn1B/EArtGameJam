@@ -5219,7 +5219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &172532830
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8708,6 +8708,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerThermometer: {fileID: 2038133442}
   radius: 4
+  multiplyCoeff: 4
+--- !u!1 &253338505 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5d0f32c0f243caa4a98b846ef19cdf17, type: 3}
+  m_PrefabInstance: {fileID: 2084271843}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &253338506
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253338505}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98fb78f6abbc68d4cac8d52ac26cb771, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &253338508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253338505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a034dd2bd84bfd498459f472f2fac60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerThermometer: {fileID: 2038133442}
+  radius: 5
   multiplyCoeff: 4
 --- !u!1 &315752222
 GameObject:
@@ -14125,7 +14164,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17040
+  m_Name: pb_Mesh19034
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -42967,7 +43006,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17326
+  m_Name: pb_Mesh19360
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -43167,7 +43206,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17190
+  m_Name: pb_Mesh19194
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -48201,7 +48240,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17234
+  m_Name: pb_Mesh19252
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -61990,6 +62029,25 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1628366389 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1507767883509144192, guid: 5d0f32c0f243caa4a98b846ef19cdf17, type: 3}
+  m_PrefabInstance: {fileID: 2084271843}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1628366393
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628366389}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.035
+  m_Height: 0.15
+  m_Direction: 1
+  m_Center: {x: 0.0003931485, y: 0.04, z: -0.0000000055879354}
 --- !u!1 &1628963591
 GameObject:
   m_ObjectHideFlags: 0
@@ -62571,7 +62629,8 @@ MonoBehaviour:
   canMove: 1
   linearVelocity: {x: 0, y: 0, z: 0}
   StaminaSlider: {fileID: 2140393040}
-  regen: 0
+  regenRadius: 50
+  Furnace: {fileID: 253338505}
 --- !u!114 &1722215487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76603,6 +76662,7 @@ MonoBehaviour:
   decreaseSpeed: 0.01
   gainSpeed: 0.005
   rebootSpeed: 0.05
+  furnace: {fileID: 253338506}
 --- !u!1 &2051308696
 GameObject:
   m_ObjectHideFlags: 0
@@ -76782,6 +76842,22 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5d0f32c0f243caa4a98b846ef19cdf17, type: 3}
       propertyPath: m_Name
       value: four_animated
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5d0f32c0f243caa4a98b846ef19cdf17, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5d0f32c0f243caa4a98b846ef19cdf17, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507767883509144192, guid: 5d0f32c0f243caa4a98b846ef19cdf17, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507767883509144192, guid: 5d0f32c0f243caa4a98b846ef19cdf17, type: 3}
+      propertyPath: m_TagString
+      value: FurnaceUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 2586607309129781981, guid: 5d0f32c0f243caa4a98b846ef19cdf17, type: 3}
       propertyPath: m_Materials.Array.data[0]

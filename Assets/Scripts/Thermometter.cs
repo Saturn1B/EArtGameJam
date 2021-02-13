@@ -21,6 +21,8 @@ public class Thermometter : MonoBehaviour
 
     public float decreaseSpeed, gainSpeed, rebootSpeed;
 
+    public Animator furnace;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -34,6 +36,23 @@ public class Thermometter : MonoBehaviour
         if (!stopDepleting)
         {
             PlayerThermometter.value -= decreaseSpeed;
+        }
+        
+        if(PlayerThermometter.value < PlayerThermometter.maxValue * 0.3)
+        {
+            furnace.SetBool("slow", true);
+            furnace.SetBool("fast", false);
+
+        }
+        else if(PlayerThermometter.value < PlayerThermometter.maxValue * 0.6)
+        {
+            furnace.SetBool("slow", false);
+            furnace.SetBool("fast", false);
+        }
+        else
+        {
+            furnace.SetBool("slow", false);
+            furnace.SetBool("fast", true);
         }
     }
 

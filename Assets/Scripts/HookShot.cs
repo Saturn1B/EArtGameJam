@@ -79,7 +79,7 @@ public class HookShot : MonoBehaviour
                     HookShotTransform.gameObject.SetActive(true);
                     HookShotTransform.localScale = Vector3.zero;
                     state = State.HookThrown;
-                    AudioHook.Play();
+                    //AudioHook.Play();
                 }
             }
         }
