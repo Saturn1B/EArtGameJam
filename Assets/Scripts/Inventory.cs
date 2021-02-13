@@ -13,6 +13,7 @@ public class Inventory : MonoBehaviour
 
     //[HideInInspector]
     public int coalNumber;
+    public int maxCoalNumber;
     public int token;
 
     // Start is called before the first frame update
@@ -23,7 +24,7 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        CoalText.text = coalNumber.ToString();
+        CoalText.text = coalNumber.ToString() + " / " + maxCoalNumber;
         TokenText.text = token.ToString();
 
     }

@@ -51,7 +51,18 @@ public class Mining : MonoBehaviour
             if (target.GetComponent<Ore>().currentTime >= target.GetComponent<Ore>().timeToMine)
             {
                 target.GetComponent<Ore>().currentTime = 0;
-                PlayerInventory.coalNumber += target.GetComponent<Ore>().coalGiven;
+                if(PlayerInventory.coalNumber < PlayerInventory.maxCoalNumber)
+                {
+                    int temp = PlayerInventory.coalNumber + target.GetComponent<Ore>().coalGiven;
+                    if(temp > PlayerInventory.maxCoalNumber)
+                    {
+                        PlayerInventory.coalNumber = PlayerInventory.maxCoalNumber;
+                    }
+                    else
+                    {
+                        PlayerInventory.coalNumber = temp;
+                    }
+                }
                 //Destroy(target.gameObject);
                 StartCoroutine(DestroyOre(target));
                 target = null;
