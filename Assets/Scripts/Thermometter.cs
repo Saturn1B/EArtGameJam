@@ -17,6 +17,8 @@ public class Thermometter : MonoBehaviour
     GameObject Player;
     Inventory PlayerInventory;
 
+    bool stopDepleting;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -27,11 +29,16 @@ public class Thermometter : MonoBehaviour
 
     void Update()
     {
-        PlayerThermometter.value -= 0.01f;
+        if (!stopDepleting)
+        {
+            PlayerThermometter.value -= 0.01f;
+        }
     }
 
     public IEnumerator AddTemperature(float value)
     {
+        stopDepleting = true;
+
         float temp = PlayerThermometter.value + value;
         float diff = PlayerThermometter.maxValue - temp;
 
@@ -61,5 +68,7 @@ public class Thermometter : MonoBehaviour
             PlayerThermometter.value = startValue;
             PlayerThermometter.maxValue += PlayerThermometter.maxValue * (percent / 100);
         }
+
+        stopDepleting = false;
     }
 }
