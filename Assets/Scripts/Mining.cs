@@ -17,6 +17,8 @@ public class Mining : MonoBehaviour
 
     bool playParticle;
 
+    public Animator Drill;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -40,12 +42,16 @@ public class Mining : MonoBehaviour
                     target.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                     playParticle = true;
                 }
+                Drill.SetBool("drilling", true);
+                transform.GetChild(3).transform.LookAt(target.transform.position);
             }
             else if (Input.GetMouseButtonUp(0))
             {
                 target.GetComponent<Ore>().currentTime = 0;
                 target.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
                 playParticle = false;
+                Drill.SetBool("drilling", false);
+                transform.GetChild(3).transform.localEulerAngles = Vector3.zero;
             }
 
             if (target.GetComponent<Ore>().currentTime >= target.GetComponent<Ore>().timeToMine)
@@ -67,6 +73,8 @@ public class Mining : MonoBehaviour
                 StartCoroutine(DestroyOre(target));
                 target = null;
                 playParticle = false;
+                Drill.SetBool("drilling", false);
+                transform.GetChild(3).transform.localEulerAngles = Vector3.zero;
             }
         }
         else
@@ -77,6 +85,8 @@ public class Mining : MonoBehaviour
                 target.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
                 target = null;
                 playParticle = false;
+                Drill.SetBool("drilling", false);
+                transform.GetChild(3).transform.localEulerAngles = Vector3.zero;
             }
         }
     }
