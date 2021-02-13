@@ -10,6 +10,7 @@ TagManager:
   - FurnaceUpgrade
   - HookShot
   - Elevator
+  - Regen
   layers:
   - Default
   - TransparentFX

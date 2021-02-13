@@ -55,9 +55,9 @@ public class Upgrades : MonoBehaviour
                     ButtonText.text = "press A to upgrade Speed";
                     if (Input.GetKeyDown(KeyCode.A))
                     {
-                        float upValue = PlayerMovements.walkSpeed * (speedPercent / 100);
-                        PlayerMovements.walkSpeed += upValue;
-                        PlayerMovements.sprintSpeed += upValue;
+                        float upValue = PlayerMovements.StaminaSlider.maxValue * (speedPercent / 100);
+                        PlayerMovements.StaminaSlider.maxValue += upValue;
+                        PlayerMovements.StaminaSlider.value = PlayerMovements.StaminaSlider.maxValue;
                         PlayerInventory.token--;
                     }
                 }

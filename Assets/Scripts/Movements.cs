@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movements : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class Movements : MonoBehaviour
     private Vector3 previousPosition = Vector3.zero;
     private Quaternion previousRotation = Quaternion.identity;
 
+    public Slider StaminaSlider;
+
+    public bool regen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,11 +45,16 @@ public class Movements : MonoBehaviour
             Move();
             Sprint();
         }
+
+        if (regen && StaminaSlider.value < StaminaSlider.maxValue)
+        {
+            StaminaSlider.value += 0.2f;
+        }
     }
 
     void Sprint()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && StaminaSlider.value > 0)
         {
             StartCoroutine(IncreaseSpeed());
         }
@@ -73,6 +83,18 @@ public class Movements : MonoBehaviour
 
         Vector3 move;
 
+        if(playerSpeed == sprintSpeed && z > 0)
+        {
+            if(StaminaSlider.value > 0)
+            {
+                StaminaSlider.value -= .1f;
+            }
+            else
+            {
+                StartCoroutine(DecreaseSpeed());
+            }
+        }
+
         if(z < 0)
         {
             move = transform.right * x * walkSpeed + transform.forward * z * walkSpeed;
@@ -80,7 +102,6 @@ public class Movements : MonoBehaviour
         else
         {
             move = transform.right * x * walkSpeed + transform.forward * z * playerSpeed;
-
         }
 
         if (isGrounded())
@@ -135,5 +156,21 @@ public class Movements : MonoBehaviour
     private bool isGrounded()
     {
         return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Regen"))
+        {
+            regen = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Regen"))
+        {
+            regen = false;
+        }
     }
 }
