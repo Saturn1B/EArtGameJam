@@ -26,7 +26,7 @@ public class Furnace : MonoBehaviour
     {
         if (Vector3.Distance(Player.transform.position, transform.position) < radius)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetMouseButtonDown(1))
             {
                 StartCoroutine(PlayerThermometer.AddTemperature(PlayerInventory.coalNumber * multiplyCoeff));
                 PlayerInventory.coalNumber = 0;

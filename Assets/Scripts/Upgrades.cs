@@ -8,9 +8,13 @@ public class Upgrades : MonoBehaviour
     GameObject Player;
     Movements PlayerMovements;
     Inventory PlayerInventory;
+    Thermometter PlayerThermometter;
 
     [SerializeField]
     float maxDistance, speedPercent, InventoryPercent;
+
+    [SerializeField]
+    float decreasePercent, gainPercent, rebootPercent;
 
     [SerializeField]
     LayerMask layer;
@@ -26,6 +30,7 @@ public class Upgrades : MonoBehaviour
         Player = GameObject.Find("Player");
         PlayerMovements = Player.GetComponent<Movements>();
         PlayerInventory = Player.GetComponent<Inventory>();
+        PlayerThermometter = GameObject.Find("TestThermometter").GetComponent<Thermometter>();
     }
 
     // Update is called once per frame
@@ -74,6 +79,27 @@ public class Upgrades : MonoBehaviour
                 {
                     ButtonText.color = new Color(0.5f, 0.5f, 0.5f);
                     ButtonText.text = "press E to upgrade Inventory";
+                }
+            }
+
+            else if (hit.transform.CompareTag("FurnaceUpgrade"))
+            {
+                if (PlayerInventory.token > 0)
+                {
+                    ButtonText.color = new Color(0.5f, 1.0f, 0.5f);
+                    ButtonText.text = "press E to upgrade Furnace";
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        PlayerThermometter.decreaseSpeed -= PlayerThermometter.decreaseSpeed * (decreasePercent / 100);
+                        PlayerThermometter.gainSpeed += PlayerThermometter.gainSpeed * (gainPercent / 100);
+                        PlayerThermometter.rebootSpeed += PlayerThermometter.rebootSpeed * (rebootPercent / 100);
+                        PlayerInventory.token--;
+                    }
+                }
+                else
+                {
+                    ButtonText.color = new Color(0.5f, 0.5f, 0.5f);
+                    ButtonText.text = "press E to upgrade Furnace";
                 }
             }
         }

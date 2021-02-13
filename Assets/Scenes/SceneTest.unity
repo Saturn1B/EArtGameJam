@@ -5116,9 +5116,9 @@ GameObject:
   - component: {fileID: 172532831}
   - component: {fileID: 172532830}
   - component: {fileID: 172532835}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FurnaceTest
-  m_TagString: Untagged
+  m_TagString: FurnaceUpgrade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19174,7 +19174,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17014
+  m_Name: pb_Mesh35564
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -43155,7 +43155,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
-  groundDistance: 0.4
+  groundDistance: 0.35
   canMove: 1
   linearVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &1722215487
@@ -43206,6 +43206,9 @@ MonoBehaviour:
   maxDistance: 3
   speedPercent: 10
   InventoryPercent: 10
+  decreasePercent: 10
+  gainPercent: 20
+  rebootPercent: 15
   layer:
     serializedVersion: 2
     m_Bits: 1024
@@ -57140,3 +57143,6 @@ MonoBehaviour:
   startValue: 50
   percent: 20
   PlayerThermometter: {fileID: 2038133441}
+  decreaseSpeed: 0.01
+  gainSpeed: 0.005
+  rebootSpeed: 0.05

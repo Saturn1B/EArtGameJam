@@ -19,6 +19,8 @@ public class Thermometter : MonoBehaviour
 
     bool stopDepleting;
 
+    public float decreaseSpeed, gainSpeed, rebootSpeed;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -31,7 +33,7 @@ public class Thermometter : MonoBehaviour
     {
         if (!stopDepleting)
         {
-            PlayerThermometter.value -= 0.01f;
+            PlayerThermometter.value -= decreaseSpeed;
         }
     }
 
@@ -48,21 +50,25 @@ public class Thermometter : MonoBehaviour
             temp -= 0.1f;
         }
 
+        float upTime = 1;
+
         while (PlayerThermometter.value < temp)
         {
-            PlayerThermometter.value += 1.5f;
+            PlayerThermometter.value += gainSpeed * Mathf.Exp(upTime);
+            upTime += 0.05f;
             yield return new WaitForSeconds(0.01f);
         }
-        PlayerThermometter.value = temp;
 
         yield return new WaitForSeconds(0.1f);
 
         if (PlayerThermometter.value >= PlayerThermometter.maxValue || diff < 0)
         {
+            float downTime = 1;
             PlayerInventory.token++;
             while (PlayerThermometter.value > startValue)
             {
-                PlayerThermometter.value -= 2.5f;
+                PlayerThermometter.value -= rebootSpeed * Mathf.Exp(downTime);
+                downTime += 0.05f;
                 yield return new WaitForSeconds(0.01f);
             }
             PlayerThermometter.value = startValue;
