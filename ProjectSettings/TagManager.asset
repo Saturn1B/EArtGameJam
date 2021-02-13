@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ToDestroy
+  - SpeedUpgrade
+  - InventoryUpgrade
+  - FurnaceUpgrade
+  - HookShot
+  - Elevator
+  - Regen
   layers:
   - Default
   - TransparentFX
@@ -15,8 +22,8 @@ TagManager:
   - 
   - Ground
   - Ore
-  - 
-  - 
+  - Upgrade
+  - Elevator
   - 
   - 
   - 

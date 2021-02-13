@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movements : MonoBehaviour
 {
@@ -26,6 +27,12 @@ public class Movements : MonoBehaviour
     private Vector3 previousPosition = Vector3.zero;
     private Quaternion previousRotation = Quaternion.identity;
 
+    public Slider StaminaSlider;
+
+    public float regenRadius;
+
+    public GameObject Furnace;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,13 +46,17 @@ public class Movements : MonoBehaviour
         {
             Move();
             Sprint();
-            CalculateVelocity();
+        }
+
+        if (Vector3.Distance(transform.position, Furnace.transform.position) < regenRadius && StaminaSlider.value < StaminaSlider.maxValue)
+        {
+            StaminaSlider.value += 0.2f;
         }
     }
 
     void Sprint()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && StaminaSlider.value > 0)
         {
             StartCoroutine(IncreaseSpeed());
         }
@@ -74,6 +85,18 @@ public class Movements : MonoBehaviour
 
         Vector3 move;
 
+        if(playerSpeed == sprintSpeed && z > 0)
+        {
+            if(StaminaSlider.value > 0)
+            {
+                StaminaSlider.value -= .1f;
+            }
+            else
+            {
+                StartCoroutine(DecreaseSpeed());
+            }
+        }
+
         if(z < 0)
         {
             move = transform.right * x * walkSpeed + transform.forward * z * walkSpeed;
@@ -81,10 +104,9 @@ public class Movements : MonoBehaviour
         else
         {
             move = transform.right * x * walkSpeed + transform.forward * z * playerSpeed;
-
         }
 
-        if (controller.isGrounded)
+        if (isGrounded())
         {
             velocityY = 0f;
             if (Input.GetKeyDown(KeyCode.Space))
@@ -133,12 +155,8 @@ public class Movements : MonoBehaviour
         playerSpeed = walkSpeed;
     }
 
-    void CalculateVelocity()
+    private bool isGrounded()
     {
-        linearVelocity = (transform.position - previousPosition) / Time.deltaTime;
-        Vector3 angularVelocity = (transform.rotation.eulerAngles - previousRotation.eulerAngles) / Time.deltaTime;
-        //Debug.Log("Vlinear" + linearVelocity.magnitude);
-        previousPosition = transform.position;
-        previousRotation = transform.rotation;
+        return Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
     }
 }

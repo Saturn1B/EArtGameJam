@@ -10,17 +10,29 @@ public class CameraMovements : MonoBehaviour
 
     public Transform Player;
 
+    GameObject Light;
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Light = transform.GetChild(0).gameObject;
+        Light.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         FPSRotate();
+        if(Input.GetKeyDown(KeyCode.L) && Light.activeSelf == true)
+        {
+            Light.SetActive(false);
+        }
+        else if(Input.GetKeyDown(KeyCode.L) && Light.activeSelf == false)
+        {
+            Light.SetActive(true);
+        }
     }
 
     private void FPSRotate()
