@@ -33,6 +33,8 @@ public class Movements : MonoBehaviour
 
     public GameObject Furnace;
 
+    public Animator Drill;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,7 +87,16 @@ public class Movements : MonoBehaviour
 
         Vector3 move;
 
-        if(playerSpeed == sprintSpeed && z > 0)
+        if(x != 0 || z != 0)
+        {
+            Drill.SetBool("moving", true);
+        }
+        else
+        {
+            Drill.SetBool("moving", false);
+        }
+
+        if (playerSpeed == sprintSpeed && z > 0)
         {
             if(StaminaSlider.value > 0)
             {
@@ -137,7 +148,8 @@ public class Movements : MonoBehaviour
 
     IEnumerator IncreaseSpeed()
     {
-        while(playerSpeed <= sprintSpeed)
+        Drill.SetFloat("Blend", 1);
+        while (playerSpeed <= sprintSpeed)
         {
             playerSpeed += 2;
             yield return new WaitForSeconds(Time.deltaTime);
@@ -147,6 +159,7 @@ public class Movements : MonoBehaviour
 
     IEnumerator DecreaseSpeed()
     {
+        Drill.SetFloat("Blend", 0);
         while (playerSpeed >= walkSpeed)
         {
             playerSpeed -= 2;
