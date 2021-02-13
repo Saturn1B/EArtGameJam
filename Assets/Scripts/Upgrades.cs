@@ -18,10 +18,10 @@ public class Upgrades : MonoBehaviour
     float decreasePercent, gainPercent, rebootPercent;
 
     [SerializeField]
-    int hookShotPrice;
+    int hookShotPrice, elevatorPrice;
 
     [SerializeField]
-    LayerMask layer;
+    LayerMask layer, elevatorLayer;
 
     [SerializeField]
     Text ButtonText;
@@ -36,7 +36,6 @@ public class Upgrades : MonoBehaviour
         PlayerInventory = Player.GetComponent<Inventory>();
         PlayerHookShot = Player.GetComponent<HookShot>();
         PlayerThermometter = GameObject.Find("TestThermometter").GetComponent<Thermometter>();
-
         PlayerHookShot.enabled = false;
     }
 
@@ -121,12 +120,36 @@ public class Upgrades : MonoBehaviour
                         PlayerHookShot.enabled = true;
                         PlayerInventory.token -= hookShotPrice;
                         Destroy(target);
+                        ButtonText.text = "";
                     }
                 }
                 else
                 {
                     ButtonText.color = new Color(0.5f, 0.5f, 0.5f);
                     ButtonText.text = "press A to purchase HookShot for " + hookShotPrice + " token";
+                }
+            }
+
+            else if (hit.transform.CompareTag("Elevator"))
+            {
+                if (!hit.transform.GetChild(0).GetComponent<Elevator>().isActivated)
+                {
+                    if (PlayerInventory.token >= elevatorPrice)
+                    {
+                        ButtonText.color = new Color(0.5f, 1.0f, 0.5f);
+                        ButtonText.text = "press A to purchase Elevator for " + elevatorPrice + " token";
+                        if (Input.GetKeyDown(KeyCode.A))
+                        {
+                            hit.transform.GetChild(0).GetComponent<Elevator>().isActivated = true;
+                            PlayerInventory.token -= elevatorPrice;
+                            ButtonText.text = "";
+                        }
+                    }
+                    else
+                    {
+                        ButtonText.color = new Color(0.5f, 0.5f, 0.5f);
+                        ButtonText.text = "press A to purchase Elevator for " + elevatorPrice + " token";
+                    }
                 }
             }
         }
@@ -138,5 +161,15 @@ public class Upgrades : MonoBehaviour
                 target = null;
             }
         }
+
+        RaycastHit hit2;
+        if (Physics.Raycast(transform.position, gameObject.transform.GetChild(0).transform.forward, out hit2, maxDistance, elevatorLayer))
+        {
+            if(Input.GetMouseButtonDown(0) && hit2.transform.GetComponent<Elevator>().isActivated && hit2.transform.GetComponent<Elevator>().canPress)
+            {
+                hit2.transform.GetComponent<Elevator>().UseElevator();
+            }
+        }
+        
     }
 }
