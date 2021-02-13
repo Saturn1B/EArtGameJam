@@ -9,12 +9,16 @@ public class Upgrades : MonoBehaviour
     Movements PlayerMovements;
     Inventory PlayerInventory;
     Thermometter PlayerThermometter;
+    HookShot PlayerHookShot;
 
     [SerializeField]
     float maxDistance, speedPercent, InventoryPercent;
 
     [SerializeField]
     float decreasePercent, gainPercent, rebootPercent;
+
+    [SerializeField]
+    int hookShotPrice;
 
     [SerializeField]
     LayerMask layer;
@@ -30,7 +34,10 @@ public class Upgrades : MonoBehaviour
         Player = GameObject.Find("Player");
         PlayerMovements = Player.GetComponent<Movements>();
         PlayerInventory = Player.GetComponent<Inventory>();
+        PlayerHookShot = Player.GetComponent<HookShot>();
         PlayerThermometter = GameObject.Find("TestThermometter").GetComponent<Thermometter>();
+
+        PlayerHookShot.enabled = false;
     }
 
     // Update is called once per frame
@@ -46,8 +53,8 @@ public class Upgrades : MonoBehaviour
                 if (PlayerInventory.token > 0)
                 {
                     ButtonText.color = new Color(0.5f, 1.0f, 0.5f);
-                    ButtonText.text = "press E to upgrade Speed";
-                    if (Input.GetKeyDown(KeyCode.E))
+                    ButtonText.text = "press A to upgrade Speed";
+                    if (Input.GetKeyDown(KeyCode.A))
                     {
                         float upValue = PlayerMovements.walkSpeed * (speedPercent / 100);
                         PlayerMovements.walkSpeed += upValue;
@@ -58,7 +65,7 @@ public class Upgrades : MonoBehaviour
                 else
                 {
                     ButtonText.color = new Color(0.5f, 0.5f, 0.5f);
-                    ButtonText.text = "press E to upgrade Speed";
+                    ButtonText.text = "press A to upgrade Speed";
                 }
             }
 
@@ -67,8 +74,8 @@ public class Upgrades : MonoBehaviour
                 if (PlayerInventory.token > 0)
                 {
                     ButtonText.color = new Color(0.5f, 1.0f, 0.5f);
-                    ButtonText.text = "press E to upgrade Inventory";
-                    if (Input.GetKeyDown(KeyCode.E))
+                    ButtonText.text = "press A to upgrade Inventory";
+                    if (Input.GetKeyDown(KeyCode.A))
                     {
                         int upValue = Mathf.RoundToInt(PlayerInventory.maxCoalNumber * (speedPercent / 100));
                         PlayerInventory.maxCoalNumber += upValue;
@@ -78,7 +85,7 @@ public class Upgrades : MonoBehaviour
                 else
                 {
                     ButtonText.color = new Color(0.5f, 0.5f, 0.5f);
-                    ButtonText.text = "press E to upgrade Inventory";
+                    ButtonText.text = "press A to upgrade Inventory";
                 }
             }
 
@@ -87,8 +94,8 @@ public class Upgrades : MonoBehaviour
                 if (PlayerInventory.token > 0)
                 {
                     ButtonText.color = new Color(0.5f, 1.0f, 0.5f);
-                    ButtonText.text = "press E to upgrade Furnace";
-                    if (Input.GetKeyDown(KeyCode.E))
+                    ButtonText.text = "press A to upgrade Furnace";
+                    if (Input.GetKeyDown(KeyCode.A))
                     {
                         PlayerThermometter.decreaseSpeed -= PlayerThermometter.decreaseSpeed * (decreasePercent / 100);
                         PlayerThermometter.gainSpeed += PlayerThermometter.gainSpeed * (gainPercent / 100);
@@ -99,7 +106,27 @@ public class Upgrades : MonoBehaviour
                 else
                 {
                     ButtonText.color = new Color(0.5f, 0.5f, 0.5f);
-                    ButtonText.text = "press E to upgrade Furnace";
+                    ButtonText.text = "press A to upgrade Furnace";
+                }
+            }
+
+            else if (hit.transform.CompareTag("HookShot"))
+            {
+                if (PlayerInventory.token >= hookShotPrice)
+                {
+                    ButtonText.color = new Color(0.5f, 1.0f, 0.5f);
+                    ButtonText.text = "press A to purchase HookShot for " + hookShotPrice + " token";
+                    if (Input.GetKeyDown(KeyCode.A))
+                    {
+                        PlayerHookShot.enabled = true;
+                        PlayerInventory.token -= hookShotPrice;
+                        Destroy(target);
+                    }
+                }
+                else
+                {
+                    ButtonText.color = new Color(0.5f, 0.5f, 0.5f);
+                    ButtonText.text = "press A to purchase HookShot for " + hookShotPrice + " token";
                 }
             }
         }

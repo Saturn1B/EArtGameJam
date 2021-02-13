@@ -34,7 +34,7 @@ public class Mining : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                target.GetComponent<Ore>().currentTime += 0.01f;
+                target.GetComponent<Ore>().currentTime += Time.deltaTime;
                 if (!playParticle)
                 {
                     target.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
