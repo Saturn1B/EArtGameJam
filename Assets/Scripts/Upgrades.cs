@@ -27,6 +27,7 @@ public class Upgrades : MonoBehaviour
     Text ButtonText;
 
     GameObject target;
+    public GameObject hookSlider;
 
     // Start is called before the first frame update
     void Awake()
@@ -35,7 +36,7 @@ public class Upgrades : MonoBehaviour
         PlayerMovements = Player.GetComponent<Movements>();
         PlayerInventory = Player.GetComponent<Inventory>();
         PlayerHookShot = Player.GetComponent<HookShot>();
-        PlayerThermometter = GameObject.Find("TestThermometter").GetComponent<Thermometter>();
+        PlayerThermometter = GameObject.Find("Slider").GetComponent<Thermometter>();
         PlayerHookShot.enabled = false;
     }
 
@@ -118,6 +119,7 @@ public class Upgrades : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.A))
                     {
                         PlayerHookShot.enabled = true;
+                        hookSlider.SetActive(true);
                         PlayerInventory.token -= hookShotPrice;
                         Destroy(target.transform.parent.gameObject);
                         ButtonText.text = "";

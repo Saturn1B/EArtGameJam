@@ -28,6 +28,8 @@ public class Thermometter : MonoBehaviour
     public Mining mining;
     public Upgrades upgrades;
 
+    public GameObject sliderArrow, sliderDot;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -38,6 +40,8 @@ public class Thermometter : MonoBehaviour
 
     void Update()
     {
+        sliderArrow.GetComponent<Image>().color = Color.Lerp(Color.blue, Color.red, PlayerThermometter.value / PlayerThermometter.maxValue);
+        sliderDot.GetComponent<Image>().color = Color.Lerp(Color.blue, Color.red, PlayerThermometter.value / PlayerThermometter.maxValue);
         if (!stopDepleting)
         {
             PlayerThermometter.value -= decreaseSpeed;

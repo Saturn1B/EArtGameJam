@@ -32,6 +32,8 @@ public class HookShot : MonoBehaviour
 
     public int maxRange;
 
+    public hookshotSlider PlayerHookshotSlider;
+
     private void Awake()
     {
         HookShotTransform.gameObject.SetActive(false);
@@ -68,7 +70,7 @@ public class HookShot : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if(Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out RaycastHit hit))
+            if(Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out RaycastHit hit) && PlayerHookshotSlider.currentValue >= PlayerHookshotSlider.maxValue)
             {
                 //hit.point
                 HookShotPos = hit.point;
@@ -79,6 +81,7 @@ public class HookShot : MonoBehaviour
                     HookShotTransform.gameObject.SetActive(true);
                     HookShotTransform.localScale = Vector3.zero;
                     state = State.HookThrown;
+                    StartCoroutine(hookRecharge());
                     //AudioHook.Play();
                 }
             }
@@ -221,5 +224,16 @@ public class HookShot : MonoBehaviour
         }
         Target = null;
         //AudioHook.Stop();
+    }
+
+    IEnumerator hookRecharge()
+    {
+        PlayerHookshotSlider.Deduct(PlayerHookshotSlider.maxValue);
+        yield return new WaitForSeconds(0.1f);
+        while(PlayerHookshotSlider.currentValue < PlayerHookshotSlider.maxValue)
+        {
+            PlayerHookshotSlider.Add(0.1f);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
     }
 }

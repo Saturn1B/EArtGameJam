@@ -14,6 +14,8 @@ public class Furnace : MonoBehaviour
     [SerializeField]
     float radius, multiplyCoeff;
 
+    public GameObject PlaceText;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,11 +28,16 @@ public class Furnace : MonoBehaviour
     {
         if (Vector3.Distance(Player.transform.position, transform.position) < radius)
         {
+            PlaceText.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
                 StartCoroutine(PlayerThermometer.AddTemperature(PlayerInventory.coalNumber * multiplyCoeff));
                 PlayerInventory.coalNumber = 0;
             }
+        }
+        else
+        {
+            PlaceText.SetActive(false);
         }
     }
 }
