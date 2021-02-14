@@ -6,6 +6,7 @@ public class Mining : MonoBehaviour
 {
     GameObject Player;
     Inventory PlayerInventory;
+    OreManager oreManager;
 
     [SerializeField]
     float maxDistance;
@@ -24,6 +25,7 @@ public class Mining : MonoBehaviour
     {
         Player = GameObject.Find("Player");
         PlayerInventory = Player.GetComponent<Inventory>();
+        oreManager = GameObject.Find("OreManager").GetComponent<OreManager>();
     }
 
     // Update is called once per frame
@@ -94,6 +96,7 @@ public class Mining : MonoBehaviour
     IEnumerator DestroyOre(GameObject ore)
     {
         ore.GetComponent<MeshDestroy>().DestroyMesh();
+        oreManager.ores.Remove(ore);
         Destroy(ore);
         yield return new WaitForSeconds(0.5f);
         GameObject[] residus = GameObject.FindGameObjectsWithTag("ToDestroy");

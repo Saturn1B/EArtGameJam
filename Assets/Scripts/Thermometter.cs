@@ -23,6 +23,11 @@ public class Thermometter : MonoBehaviour
 
     public Animator furnace;
 
+    public GameObject LooseScreen, HUD;
+
+    public Mining mining;
+    public Upgrades upgrades;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -36,6 +41,17 @@ public class Thermometter : MonoBehaviour
         if (!stopDepleting)
         {
             PlayerThermometter.value -= decreaseSpeed;
+        }
+
+        if(PlayerThermometter.value <= 0)
+        {
+            HUD.SetActive(false);
+            LooseScreen.SetActive(true);
+            mining.enabled = false;
+            upgrades.enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0;
         }
         
         if(PlayerThermometter.value < PlayerThermometter.maxValue * 0.3)
