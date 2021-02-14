@@ -52,7 +52,7 @@ public class Upgrades : MonoBehaviour
                 if (PlayerInventory.token > 0)
                 {
                     ButtonText.color = new Color(0.5f, 1.0f, 0.5f);
-                    ButtonText.text = "press A to upgrade Speed";
+                    ButtonText.text = "press A to upgrade Stamina";
                     if (Input.GetKeyDown(KeyCode.A))
                     {
                         float upValue = PlayerMovements.StaminaSlider.maxValue * (speedPercent / 100);
@@ -64,7 +64,7 @@ public class Upgrades : MonoBehaviour
                 else
                 {
                     ButtonText.color = new Color(0.5f, 0.5f, 0.5f);
-                    ButtonText.text = "press A to upgrade Speed";
+                    ButtonText.text = "press A to upgrade Stamina";
                 }
             }
 
@@ -119,7 +119,7 @@ public class Upgrades : MonoBehaviour
                     {
                         PlayerHookShot.enabled = true;
                         PlayerInventory.token -= hookShotPrice;
-                        Destroy(target);
+                        Destroy(target.transform.parent.gameObject);
                         ButtonText.text = "";
                     }
                 }

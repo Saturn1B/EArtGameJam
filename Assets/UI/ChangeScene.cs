@@ -28,16 +28,6 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene(3);
     }
 
-    public void SettingsButton()
-    {
-        SceneManager.LoadScene(2);
-    }
-
-    public void MenuButton()
-    {
-        SceneManager.LoadScene(0);
-    }
-
     public void QuitButton()
     {
         Application.Quit();
